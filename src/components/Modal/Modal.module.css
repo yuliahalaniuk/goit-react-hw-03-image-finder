@@ -1,0 +1,19 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+
+  background-color: rgba(23, 23, 23, 0.5);
+}
+
+.modalBlock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 80%;
+  transform: translate(-50%, -50%);
+}

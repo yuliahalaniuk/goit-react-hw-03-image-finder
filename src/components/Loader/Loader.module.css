@@ -1,0 +1,32 @@
+.loader {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+.loader::after,
+.loader::before {
+  content: '';
+  box-sizing: border-box;
+  width: 80px;
+  height: 80px;
+  border: 6px solid #322c65;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: scaleOut 2s ease-in-out infinite;
+}
+.loader::after {
+  border-color: #3f51b5;
+  animation-delay: 1s;
+}
+
+@keyframes scaleOut {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
