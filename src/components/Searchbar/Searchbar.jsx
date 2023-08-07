@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import css from './Searchbar.module.css';
 import { CiSearch } from 'react-icons/ci';
 
@@ -11,7 +12,7 @@ class Searchbar extends Component {
     e.preventDefault();
 
     if (this.state.query.trim() === '') {
-      alert('Write something you idiot');
+      alert('Please enter you request');
       return;
     }
 
@@ -45,5 +46,9 @@ class Searchbar extends Component {
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Searchbar;
