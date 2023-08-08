@@ -32,7 +32,7 @@ class Modal extends Component {
     return createPortal(
       <div className={css.modalBackdrop} onClick={this.hadleBackdropClick}>
         <div className={css.modalBlock}>
-          <img src={this.props.imgUrl} alt="modal" />
+          <img src={this.props.imgUrl} alt="modal" className={css.modalImg} />
         </div>
       </div>,
       modalEl
