@@ -78,7 +78,6 @@ class App extends Component {
 
     const shouldRenderLoadMoreButton = foundResults.length < totalHits;
 
-    console.log(this.totalHits);
     return (
       <>
         <Searchbar onSubmit={handleSearchSubmit} />
