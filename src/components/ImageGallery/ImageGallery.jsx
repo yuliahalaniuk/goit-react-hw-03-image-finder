@@ -48,7 +48,7 @@ class ImageGallery extends Component {
 }
 
 ImageGallery.propTypes = {
-  foundResults: PropTypes.arrayOf.isRequired,
+  foundResults: PropTypes.array.isRequired,
 };
 
 export default ImageGallery;

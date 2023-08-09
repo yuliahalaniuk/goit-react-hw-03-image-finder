@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-import css from './App.module.css';
 import Searchbar from 'components/Searchbar/Searchbar';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
+import Warning from '../Warning/Warning';
 
+import css from './App.module.css';
 import { fetchImages } from '../../api/api';
 
 const STATUS = {
@@ -63,24 +64,19 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.searchQuery !== this.state.searchQuery ||
-      prevState.page !== this.state.page
-    ) {
-      if (prevState.searchQuery !== this.state.searchQuery) {
-        this.setState({ status: STATUS.PENDING, foundResults: [] });
-        this.getImages(this.state.searchQuery);
-        return;
-      }
-
+    if (prevState.searchQuery !== this.state.searchQuery) {
+      this.setState({ status: STATUS.PENDING, foundResults: [] });
+      this.getImages(this.state.searchQuery);
+    } else if (prevState.page !== this.state.page) {
       this.getImages(this.state.searchQuery);
     }
   }
 
   render() {
-    const { handleSearchSubmit } = this;
+    const { handleSearchSubmit, onLoadMoreBtnClick, totalHits } = this;
     const { searchQuery, status, foundResults, isLoading } = this.state;
-    const shouldRenderLoadMoreButton = foundResults.length < this.totalHits;
+
+    const shouldRenderLoadMoreButton = foundResults.length < totalHits;
 
     console.log(this.totalHits);
     return (
@@ -88,19 +84,19 @@ class App extends Component {
         <Searchbar onSubmit={handleSearchSubmit} />
         <div className={css.ImageListContainer}>
           {status === STATUS.IDLE && (
-            <p className={css.warningText}>Please enter you request</p>
+            <Warning message="Please enter you request" />
           )}
 
           {status === STATUS.PENDING && <Loader />}
 
           {status === STATUS.REJECTED_FAILED && (
-            <div className={css.warningText}> Opps... Something went wrong</div>
+            <Warning message="Opps... Something went wrong" />
           )}
 
           {status === STATUS.REJECTED_NOT_FOUND && (
-            <div className={css.warningText}>
-              Sorry, nothing found for {searchQuery}. Please try again
-            </div>
+            <Warning
+              message={`Sorry, nothing found for ${searchQuery}. Please try again`}
+            />
           )}
 
           {status === STATUS.RESOLVED && (
@@ -110,11 +106,9 @@ class App extends Component {
               {isLoading ? (
                 <Loader />
               ) : shouldRenderLoadMoreButton ? (
-                <Button handleLoadMore={this.onLoadMoreBtnClick} />
+                <Button handleLoadMore={onLoadMoreBtnClick} />
               ) : (
-                <div className={css.warningText}>
-                  You've reached the end of the results
-                </div>
+                <Warning message=" You've reached the end of the results" />
               )}
             </>
           )}
