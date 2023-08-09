@@ -7,7 +7,7 @@ import Button from 'components/Button/Button';
 import Warning from '../Warning/Warning';
 
 import css from './App.module.css';
-import { fetchImages } from '../../api/api';
+import { fetchImages } from '../../api/api.js';
 
 const STATUS = {
   IDLE: 'idle',
