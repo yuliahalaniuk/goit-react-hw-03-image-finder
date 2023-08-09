@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import css from './ImageGalleryItems.module.css';
 import PropTypes from 'prop-types';
 
-class ImageGalleryItem extends Component {
-  render() {
-    const { onImgClick, webformatURL, tags, largeImageURL } = this.props;
-
-    return (
+const ImageGalleryItem = ({
+  onImgClick,
+  webformatURL,
+  tags,
+  largeImageURL,
+}) => {
+  return (
+    <>
       <li
         className={css.imgListItem}
         onClick={() => {
@@ -15,9 +18,9 @@ class ImageGalleryItem extends Component {
       >
         <img src={webformatURL} className={css.imgListPic} alt={tags} />
       </li>
-    );
-  }
-}
+    </>
+  );
+};
 
 ImageGalleryItem.propTypes = {
   onImgClick: PropTypes.func.isRequired,
